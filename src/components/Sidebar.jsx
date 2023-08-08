@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ArtistList from "./ArtistList";
 import logo from "../assets/Feezer.png";
 import EarbudsIcon from "@mui/icons-material/Earbuds";
+import AllArtist from "./AllArtist";
 
 export default function Sidebar() {
   const artist = [
@@ -273,6 +274,7 @@ export default function Sidebar() {
         <EarbudsIcon fontSize="large" />
         <h1>Feezer</h1>
       </Header>
+      <AllArtist/>
       <ArtistList artists={artist} />
     </Container>
   );
