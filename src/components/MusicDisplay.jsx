@@ -9,12 +9,15 @@ import {
   Paper,
   Grid,
   Typography,
+  IconButton,
+  Button,
 } from "@mui/material";
 import styled from "styled-components";
+import PlayCircleIcon from "@mui/icons-material/PlayCircle";
 
 export default function MusicDisplay({ artists }) {
   return (
-    <Container>
+    <Section>
       <Grid container spacing={3}>
         {artists.map((artist) => (
           <Grid item key={artist.name} xs={12}>
@@ -22,10 +25,7 @@ export default function MusicDisplay({ artists }) {
               <div key={album.title}>
                 <Grid container spacing={2}>
                   <Grid item xs={2}>
-                    <ArtistImg
-                      src={album.coverImage}
-                      alt={album.title}
-                    />
+                    <ArtistImg src={album.coverImage} alt={album.title} />
                   </Grid>
                   <Grid item xs={10}>
                     <Typography variant="h3">{album.title}</Typography>
@@ -47,7 +47,17 @@ export default function MusicDisplay({ artists }) {
                     <TableBody>
                       {album.songs.map((song) => (
                         <TableRow key={song.id}>
-                          <TableCell>{song.title}</TableCell>
+                          <TableCell>
+                            <Container>
+                              <Button>
+                                <PlayArtist
+                                  src={album.coverImage}
+                                  alt={album.title}
+                                />
+                              </Button>
+                              {song.title}
+                            </Container>
+                          </TableCell>
                           <TableCell>{song.releaseYear}</TableCell>
                           <TableCell>{song.duration}</TableCell>
                           <TableCell>{song.artist}</TableCell>
@@ -61,7 +71,7 @@ export default function MusicDisplay({ artists }) {
           </Grid>
         ))}
       </Grid>
-    </Container>
+    </Section>
   );
 }
 
@@ -70,7 +80,19 @@ const ArtistImg = styled.img`
   height: auto;
 `;
 
-const Container = styled.div`
+const Section = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+const PlayArtist = styled.img`
+  width: 3em;
+  height: 3em;
+  border-radius: 50%;
+  margin-right: 1em;
+`;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
 `;
