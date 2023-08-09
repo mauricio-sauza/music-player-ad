@@ -1,59 +1,55 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Button, Modal, Box } from "@mui/material";
+import { Button, Modal, Box, IconButton } from "@mui/material";
 import ArtistForm from "./ArtistForm";
 import styled from "styled-components";
 import ArtistService from "../services/ArtistService";
 import Dummy from "./Dummy";
+import AlbumsForm from "./AlbumsForm";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import AlbumIcon from "@mui/icons-material/Album";
 
 export default function Navbar() {
-  const artist = new ArtistService();
   const [showModal, setShowModal] = useState(false);
-  const [storedArtistData, setStoredArtistData] = useState(null);
   const [showLocalStorageModal, setShowLocalStorageModal] = useState(false);
+  const [showAlbumModal, setShowAlbumModal] = useState(false);
 
   const handleToggleModal = () => {
     setShowModal(!showModal);
   };
 
-  const handleToggleLocalStorageModal = () => {
-    setShowLocalStorageModal(!showLocalStorageModal);
+  const handleToggleAlbumModal = () => {
+    setShowAlbumModal(!showAlbumModal);
   };
 
   const handleArtistSubmit = (artistData) => {
-    // Agrega la lógica para manejar los datos del artista aquí
-    console.log("Datos del artista:", artistData);
     setShowModal(false);
   };
   return (
     <div className="App">
       <header className="App-header">
         <h1>Music App</h1>
-        <Button onClick={handleToggleModal} variant="contained">
-          Create Artist
-        </Button>
-        <Button
-          onClick={handleToggleLocalStorageModal}
-          variant="contained"
+        <IconButton
+          aria-label="Create Artist"
+          size="large"
+          onClick={handleToggleModal}
         >
-          LocalStorage
-        </Button>
+          <AddCircleIcon fontSize="large" />
+        </IconButton>
+        <IconButton
+          aria-label="Create Album"
+          size="large"
+          onClick={handleToggleAlbumModal}
+        >
+          <AlbumIcon fontSize="large" />
+        </IconButton>
         <ArtistForm
           open={showModal}
           onClose={handleToggleModal}
           onSubmit={handleArtistSubmit}
         />
-        <Dummy
-          open={showLocalStorageModal}
-          onClose={handleToggleLocalStorageModal}
-        />
+        <AlbumsForm open={showAlbumModal} onClose={handleToggleAlbumModal} />
       </header>
     </div>
   );
 }
-
-const Header = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
