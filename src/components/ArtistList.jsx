@@ -7,7 +7,7 @@ export default function ArtistList({ artists }) {
     <Container>
       <List>
         {artists.map((item) => (
-          <ButtonCard key={item.id}>
+          <ButtonCard key={item.name}>
             <Card
               sx={{
                 display: "flex",

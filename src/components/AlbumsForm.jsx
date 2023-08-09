@@ -1,28 +1,27 @@
 // src/ArtistForm.js
 import React, { useState } from "react";
 import { TextField, Button, Box, Modal } from "@mui/material";
-import ArtistService from "../services/ArtistService";
+import AlbumService from "../services/AlbumService";
 
-const ArtistForm = ({ open, onClose, onSubmit }) => {
-  const artist = new ArtistService();
+const AlbumsForm = ({ open, onClose, onSubmit }) => {
+  const album = new AlbumService();
 
-  const [name, setName] = useState("");
+  const [title, setTitle] = useState("");
   const [genres, setGenres] = useState("");
-  const [members, setMembers] = useState("");
-  const [website, setWebsite] = useState("");
-  const [image, setImage] = useState("");
+  const [releaseYear, setReleaseYear] = useState("");
+  const [coverImage, setCoverImage] = useState("");
+  const [artistId, setArtistId] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const artistData = { name, genres, members, website, image };
-    artist.saveArtistData(artistData);
-    setName('');
+    const albumData = { title, genres, releaseYear, coverImage, artistId };
+    album.saveAlbumData(albumData);
+    setTitle('');
     setGenres('');
-    setMembers('');
-    setWebsite('');
-    setImage('');
-    console.log(artist.getStoredArtistData());
-    onSubmit(artistData);
+    setReleaseYear('');
+    setCoverImage('');
+    setArtistId('');
+    onSubmit(albumData);
   };
 
   return (
@@ -39,36 +38,36 @@ const ArtistForm = ({ open, onClose, onSubmit }) => {
           p: 4,
         }}
       >
-        <h2>Add Artist</h2>
+        <h2>Add Albums</h2>
         <form onSubmit={handleSubmit}>
           <TextField
-            label="Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            label="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             fullWidth
           />
           <TextField
-            label="Genre"
+            label="Genres"
             value={genres}
             onChange={(e) => setGenres(e.target.value)}
             fullWidth
           />
           <TextField
-            label="Members"
-            value={members}
-            onChange={(e) => setMembers(e.target.value)}
+            label="Release Year"
+            value={releaseYear}
+            onChange={(e) => setReleaseYear(e.target.value)}
             fullWidth
           />
           <TextField
-            label="Website"
-            value={website}
-            onChange={(e) => setWebsite(e.target.value)}
+            label="Cover Image"
+            value={coverImage}
+            onChange={(e) => setCoverImage(e.target.value)}
             fullWidth
           />
           <TextField
-            label="Image"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            label="Artist"
+            value={artistId}
+            onChange={(e) => setArtistId(e.target.value)}
             fullWidth
           />
           <Button type="submit" variant="contained" color="primary">
@@ -80,4 +79,4 @@ const ArtistForm = ({ open, onClose, onSubmit }) => {
   );
 };
 
-export default ArtistForm;
+export default AlbumsForm;
